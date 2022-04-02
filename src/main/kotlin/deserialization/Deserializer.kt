@@ -26,6 +26,13 @@ fun <T : Any> deserialize(json: Reader, targetClass: KClass<T>): T {
     return seed.spawn()
 }
 
+fun <T : Any> deserialize(json: Reader, targetClass: KClass<T>, c: Constructor<T>): T {
+    val primaryCtor: KFunction<T>? = targetClass.primaryConstructor
+    val seed = ObjectSeed(targetClass, ClassInfoCache())
+    Parser(json, seed).parseTele()
+    return seed.spawn()
+}
+
 interface JsonObject {
     fun setSimpleProperty(propertyName: String, value: Any?)
 
