@@ -1,7 +1,5 @@
 package deserialization
 
-import com.tym.tparse.BodyKey
-import com.tym.tparse.HeadKey
 import com.tym.tparse.deserialization.deserialize
 
 data class Author(val name: String)
