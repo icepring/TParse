@@ -1,9 +1,9 @@
-package kotlin.tym.tparse.examples.rule
+package com.tym.tparse.examples.rule
 
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
-import kotlin.tym.tparse.serialization.serialize
+import com.tym.tparse.serialization.serialize
 import kotlin.test.assertEquals
 
 data class Person(val name: String, val age: Int)

@@ -1,7 +1,7 @@
-package kotlin.tym.tparse.serialization
+package com.tym.tparse.serialization
 
 import org.junit.Test
-import kotlin.tym.tparse.deserialization.*
+import com.tym.tparse.deserialization.*
 import kotlin.test.assertEquals
 
 class SerializerTest {

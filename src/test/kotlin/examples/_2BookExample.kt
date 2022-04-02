@@ -1,7 +1,7 @@
-package kotlin.tym.tparse.examples.innerObjectTest
+package com.tym.tparse.examples.innerObjectTest
 
 import org.junit.Test
-import kotlin.tym.tparse.examples.jsonSerializerTest.testJsonSerializer
+import com.tym.tparse.examples.jsonSerializerTest.testJsonSerializer
 
 data class Author(val fullName: String)
 data class Book(val name: String, val authors: List<Author>)

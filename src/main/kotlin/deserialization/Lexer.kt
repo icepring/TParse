@@ -1,4 +1,4 @@
-package kotlin.tym.tparse.deserialization
+package com.tym.tparse.deserialization
 
 import java.io.BufferedReader
 import java.io.Reader
@@ -32,42 +32,8 @@ interface Token {
     }
 }
 
-class MalformedJSONException(message: String): Exception(message)
+class MalformedException(message: String): Exception(message)
 
-
-internal class LineReader(val reader: BufferedReader){
-    private var nextLine: String? = null
-    var eof = false
-        private set
-
-    private fun advance(){
-        if (eof) return
-        val c = reader.readLine()
-        if (c == null) {
-            eof = true
-        }
-        else {
-            nextLine = c
-        }
-    }
-
-    fun peekNext(): String? {
-        if (nextLine == null) {
-            advance()
-        }
-        return if (eof) null else nextLine
-    }
-
-    fun readNext() = peekNext().apply { nextLine = null }
-}
-
-class LineLexer(reader: BufferedReader){
-    private val lineReader = LineReader(reader)
-    fun nextToken(): List<Token.StringValue>? {
-        val c: String = lineReader.readNext() ?: return null
-        return c.split("=").map { Token.StringValue(it) }.filter { it.value!="=" }
-    }
-}
 internal class CharReader(val reader: Reader) {
     private val tokenBuffer = CharArray(4)
     private var nextChar: Char? = null
@@ -98,18 +64,18 @@ internal class CharReader(val reader: Reader) {
         assert(nextChar == null)
         assert(length <= tokenBuffer.size)
         if (reader.read(tokenBuffer, 0, length) != length) {
-            throw MalformedJSONException("Premature end of data")
+            throw MalformedException("Premature end of data")
         }
         return String(tokenBuffer, 0, length)
     }
 
     fun expectText(text: String, followedBy: Set<Char>) {
         if (readNextChars(text.length) != text) {
-            throw MalformedJSONException("Expected text $text")
+            throw MalformedException("Expected text $text")
         }
         val next = peekNext()
         if (next != null && next !in followedBy)
-            throw MalformedJSONException("Expected text in $followedBy")
+            throw MalformedException("Expected text in $followedBy")
     }
 }
 
@@ -147,16 +113,16 @@ class Lexer(reader: Reader) {
         if (c == null) return null
 
         return tokenMap[c]?.invoke(c)
-                ?: throw MalformedJSONException("Unexpected token $c")
+                ?: throw MalformedException("Unexpected token $c")
     }
 
     private fun readStringToken(): Token {
         val result = StringBuilder()
         while (true) {
-            val c = charReader.readNext() ?: throw MalformedJSONException("Unterminated string")
+            val c = charReader.readNext() ?: throw MalformedException("Unterminated string")
             if (c == '"') break
             if (c == '\\') {
-                val escaped = charReader.readNext() ?: throw MalformedJSONException("Unterminated escape sequence")
+                val escaped = charReader.readNext() ?: throw MalformedException("Unterminated escape sequence")
                 when(escaped) {
                     '\\', '/', '\"' -> result.append(escaped)
                     'b' -> result.append('\b')
@@ -168,7 +134,7 @@ class Lexer(reader: Reader) {
                         val hexChars = charReader.readNextChars(4)
                         result.append(Integer.parseInt(hexChars, 16).toChar())
                     }
-                    else -> throw MalformedJSONException("Unsupported escape sequence \\$escaped")
+                    else -> throw MalformedException("Unsupported escape sequence \\$escaped")
                 }
             }
             else {
@@ -189,3 +155,38 @@ class Lexer(reader: Reader) {
         return if (value.contains(".")) Token.DoubleValue(value.toDouble()) else Token.LongValue(value.toLong())
     }
 }
+
+internal class LineReader(val reader: BufferedReader){
+    private var nextLine: String? = null
+    var eof = false
+        private set
+
+    private fun advance(){
+        if (eof) return
+        val c = reader.readLine()
+        if (c == null) {
+            eof = true
+        }
+        else {
+            nextLine = c
+        }
+    }
+
+    fun peekNext(): String? {
+        if (nextLine == null) {
+            advance()
+        }
+        return if (eof) null else nextLine
+    }
+
+    fun readNext() = peekNext().apply { nextLine = null }
+}
+
+class LineLexer(reader: BufferedReader){
+    private val lineReader = LineReader(reader)
+    fun nextToken(): List<Token.StringValue>? {
+        val c: String = lineReader.readNext() ?: return null
+        return c.split("=").map { Token.StringValue(it) }.filter { it.value!="=" }
+    }
+}
+

@@ -1,7 +1,7 @@
-package kotlin.tym.tparse.deserialization
+package com.tym.tparse.deserialization
 
 import org.junit.Test
-import kotlin.tym.tparse.deserialization.ParserTest.JsonParserAction.*
+import com.tym.tparse.deserialization.ParserTest.JsonParserAction.*
 import java.io.StringReader
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -53,7 +53,7 @@ class ParserTest {
     }
 
     private fun verifyMalformed(text: String) {
-        assertFailsWith<MalformedJSONException> {
+        assertFailsWith<MalformedException> {
             Parser(StringReader(text), ReportingJsonObject(0)).parse()
         }
     }

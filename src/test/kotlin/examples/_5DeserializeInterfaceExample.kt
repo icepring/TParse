@@ -1,8 +1,8 @@
 package examples
 
 import org.junit.Test
-import kotlin.tym.tparse.DeserializeInterface
-import kotlin.tym.tparse.examples.jsonSerializerTest.testJsonSerializer
+import com.tym.tparse.DeserializeInterface
+import com.tym.tparse.examples.jsonSerializerTest.testJsonSerializer
 
 interface Company {
     val name: String

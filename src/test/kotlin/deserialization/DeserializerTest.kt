@@ -1,7 +1,7 @@
-package kotlin.tym.tparse.deserialization
+package com.tym.tparse.deserialization
 
 import org.junit.Test
-import kotlin.tym.tparse.*
+import com.tym.tparse.*
 import java.util.*
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -79,19 +79,19 @@ class DeserializerTest {
     }
 
     @Test fun testPropertyTypeMismatch() {
-        assertFailsWith<JKidException> {
+        assertFailsWith<TParseException> {
             deserialize<SingleStringProp>("{\"s\": 1}")
         }
     }
 
     @Test fun testPropertyTypeMismatchNull() {
-        assertFailsWith<JKidException> {
+        assertFailsWith<TParseException> {
             deserialize<SingleStringProp>("{\"s\": null}")
         }
     }
 
     @Test fun testMissingPropertyException() {
-        assertFailsWith<JKidException> {
+        assertFailsWith<TParseException> {
             deserialize<SingleStringProp>("{}")
         }
     }
@@ -102,7 +102,7 @@ class DeserializerTest {
     }
 
     @Test fun testObjectForListOfInts() {
-        assertFailsWith<JKidException> {
+        assertFailsWith<TParseException> {
             deserialize<ListOfInts>("""{"ints": {"a": 42}}""")
         }
     }
@@ -134,7 +134,7 @@ class NumberSerializer: ValueSerializer<Int> {
     override fun fromJsonValue(jsonValue: Any?): Int = when(jsonValue) {
         "ZERO" -> 0
         "ONE" -> 1
-        else -> throw JKidException("Unexpected value $jsonValue")
+        else -> throw TParseException("Unexpected value $jsonValue")
     }
 
     override fun toJsonValue(value: Int): Any? = when(value) {

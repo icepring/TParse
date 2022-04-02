@@ -1,4 +1,4 @@
-package kotlin.tym.tparse.deserialization
+package com.tym.tparse.deserialization
 
 import org.junit.Test
 import java.io.StringReader
@@ -70,7 +70,7 @@ class LexerTest {
     }
 
     private fun verifyMalformed(text: String) {
-        assertFailsWith<MalformedJSONException> {
+        assertFailsWith<MalformedException> {
             Lexer(StringReader(text)).nextToken()
         }
     }

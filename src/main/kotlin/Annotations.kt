@@ -1,4 +1,4 @@
-package kotlin.tym.tparse
+package com.tym.tparse
 
 import kotlin.reflect.KClass
 
@@ -22,8 +22,8 @@ interface ValueSerializer<T> {
     fun fromJsonValue(jsonValue: Any?): T
 }
 
-@Target(AnnotationTarget.PROPERTY)
+@Target(AnnotationTarget.PROPERTY, AnnotationTarget.FIELD)
 annotation class DeserializeInterface(val targetClass: KClass<out Any>)
 
-@Target(AnnotationTarget.PROPERTY)
+@Target(AnnotationTarget.PROPERTY, AnnotationTarget.FIELD)
 annotation class CustomSerializer(val serializerClass: KClass<out ValueSerializer<*>>)

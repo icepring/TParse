@@ -1,10 +1,10 @@
-package kotlin.tym.tparse.exercise
+package com.tym.tparse.exercise
 
 import org.junit.Ignore
 import org.junit.Test
-import kotlin.tym.tparse.DateFormat
-import kotlin.tym.tparse.deserialization.deserialize
-import kotlin.tym.tparse.serialization.serialize
+import com.tym.tparse.DateFormat
+import com.tym.tparse.deserialization.deserialize
+import com.tym.tparse.serialization.serialize
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.test.assertEquals

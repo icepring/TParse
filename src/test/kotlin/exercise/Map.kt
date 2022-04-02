@@ -2,8 +2,8 @@ package exercise
 
 import org.junit.Ignore
 import org.junit.Test
-import kotlin.tym.tparse.deserialization.deserialize
-import kotlin.tym.tparse.serialization.serialize
+import com.tym.tparse.deserialization.deserialize
+import com.tym.tparse.serialization.serialize
 import kotlin.test.assertEquals
 
 data class BookStore(val bookPrice: Map<String, Double>)

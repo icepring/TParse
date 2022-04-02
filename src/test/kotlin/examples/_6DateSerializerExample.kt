@@ -1,9 +1,9 @@
-package kotlin.tym.tparse.examples.customSerializerTest
+package com.tym.tparse.examples.customSerializerTest
 
 import org.junit.Test
-import kotlin.tym.tparse.CustomSerializer
-import kotlin.tym.tparse.ValueSerializer
-import kotlin.tym.tparse.examples.jsonSerializerTest.testJsonSerializer
+import com.tym.tparse.CustomSerializer
+import com.tym.tparse.ValueSerializer
+import com.tym.tparse.examples.jsonSerializerTest.testJsonSerializer
 import java.text.SimpleDateFormat
 import java.util.*
 

@@ -1,6 +1,6 @@
-package kotlin.tym.tparse
+package com.tym.tparse
 
-import kotlin.tym.tparse.deserialization.JKidException
+import com.tym.tparse.deserialization.TParseException
 import java.lang.reflect.Type
 
 fun serializerForBasicType(type: Type): ValueSerializer<out Any?> {
@@ -22,7 +22,7 @@ fun serializerForType(type: Type): ValueSerializer<out Any?>? =
         }
 
 private fun Any?.expectNumber(): Number {
-    if (this !is Number) throw JKidException("Expected number, was: $this")
+    if (this !is Number) throw TParseException("Expected number, was: $this")
     return this
 }
 
@@ -58,7 +58,7 @@ object DoubleSerializer : ValueSerializer<Double> {
 
 object BooleanSerializer : ValueSerializer<Boolean> {
     override fun fromJsonValue(jsonValue: Any?): Boolean {
-        if (jsonValue !is Boolean) throw JKidException("Expected boolean, was: $jsonValue")
+        if (jsonValue !is Boolean) throw TParseException("Expected boolean, was: $jsonValue")
         return jsonValue
     }
 
@@ -67,7 +67,7 @@ object BooleanSerializer : ValueSerializer<Boolean> {
 
 object StringSerializer : ValueSerializer<String?> {
     override fun fromJsonValue(jsonValue: Any?): String? {
-        if (jsonValue !is String?) throw JKidException("Expected string, was: $jsonValue")
+        if (jsonValue !is String?) throw TParseException("Expected string, was: $jsonValue")
         return jsonValue
     }
 

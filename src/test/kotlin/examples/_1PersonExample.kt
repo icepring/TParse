@@ -1,8 +1,8 @@
-package kotlin.tym.tparse.examples.simple
+package com.tym.tparse.examples.simple
 
 import org.junit.Test
-import kotlin.tym.tparse.deserialization.deserialize
-import kotlin.tym.tparse.serialization.serialize
+import com.tym.tparse.deserialization.deserialize
+import com.tym.tparse.serialization.serialize
 import kotlin.test.assertEquals
 
 data class Person(val name: String, val age: Int)

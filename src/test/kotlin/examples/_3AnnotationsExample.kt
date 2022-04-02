@@ -1,9 +1,9 @@
-package kotlin.tym.tparse.examples.annotationsTest
+package com.tym.tparse.examples.annotationsTest
 
 import org.junit.Test
-import kotlin.tym.tparse.JsonExclude
-import kotlin.tym.tparse.JsonName
-import kotlin.tym.tparse.examples.jsonSerializerTest.testJsonSerializer
+import com.tym.tparse.JsonExclude
+import com.tym.tparse.JsonName
+import com.tym.tparse.examples.jsonSerializerTest.testJsonSerializer
 
 data class Person(
         @JsonName(name = "first_name") val firstName: String,

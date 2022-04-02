@@ -1,6 +1,6 @@
-package kotlin.tym.tparse.serialization
+package com.tym.tparse.serialization
 
-import kotlin.tym.tparse.*
+import com.tym.tparse.*
 import kotlin.reflect.KProperty
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.memberProperties
